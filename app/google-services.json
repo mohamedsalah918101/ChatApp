@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "378232072514",
+    "project_id": "chatapp-998db",
+    "storage_bucket": "chatapp-998db.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:378232072514:android:ad34954c8e9817dc8180db",
+        "android_client_info": {
+          "package_name": "com.petra.chatapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxtxD5cTlJ7FA9qlUZniQi_L8R99krHc0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
