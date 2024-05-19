@@ -3,8 +3,6 @@
 package com.petra.chatapp
 
 import android.os.Bundle
-import android.util.Log
-import android.view.InflateException
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
