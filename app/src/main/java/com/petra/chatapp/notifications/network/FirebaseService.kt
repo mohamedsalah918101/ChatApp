@@ -1,4 +1,3 @@
-@file:Suppress("DEPRECATION")
 
 package com.petra.chatapp.notifications.network
 
@@ -39,7 +38,6 @@ class FirebaseService: FirebaseMessagingService() {
         token = newtoken
     }
 
-    @RequiresApi(Build.VERSION_CODES.S)
     override fun onMessageReceived(message: RemoteMessage) {
         super.onMessageReceived(message)
 
@@ -47,11 +45,11 @@ class FirebaseService: FirebaseMessagingService() {
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val notificationID = Random.nextInt()
 
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             createNotifictionChannel(notificationManager)
         }
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+        val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
 
         val remoteInput = RemoteInput.Builder(KEY_REPLAY_TEXT).setLabel("Replay").build()
         val replayIntent = Intent(this, NotificationReply::class.java)
@@ -61,16 +59,19 @@ class FirebaseService: FirebaseMessagingService() {
         sharedCustomPref.setIntValue("values", notificationID)
 
         val notification = NotificationCompat.Builder(this, CHANNEL_ID)
-            .setContentText(Html.fromHtml("<b>${message.data["title"]}</b>: ${message.data["message"]}"))
+            .setContentTitle(message.data["title"])
+            .setContentText(message.data["message"])
             .setSmallIcon(R.drawable.chatapp)
-            .setAutoCancel(true)
             .setContentIntent(pendingIntent)
+            .setAutoCancel(true)
             .addAction(replayAction)
             .build()
 
         notificationManager.notify(notificationID, notification)
 
     }
+
+
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun createNotifictionChannel(notificationManager: NotificationManager) {

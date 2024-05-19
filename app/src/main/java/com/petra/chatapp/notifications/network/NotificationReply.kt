@@ -4,8 +4,6 @@ import android.app.NotificationManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.core.app.RemoteInput
 import com.google.firebase.firestore.FirebaseFirestore
@@ -21,7 +19,7 @@ class NotificationReply : BroadcastReceiver() {
     val firestore = FirebaseFirestore.getInstance()
 
 
-    @RequiresApi(Build.VERSION_CODES.P)
+
     override fun onReceive(context: Context?, intent: Intent?) {
 
         val notificationManager: NotificationManager =

@@ -7,6 +7,8 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
     <application
         android:name=".MyApplication"
@@ -38,17 +40,27 @@
             android:exported="true">
         </activity>
 
-        <service android:name="com.petra.chatapp.notifications.network.FirebaseService"
-            android:permission="com.google.android.c2dm.permission.SEND"
-            android:exported="false"
-            android:enabled="true">
+        <service
+            android:name=".notifications.network.FirebaseService"
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
-                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
             </intent-filter>
         </service>
 
         <receiver android:name=".notifications.network.NotificationReply"/>
+
+        <!-- Add FirebaseInstanceIdReceiver for receiving messages on boot -->
+        <receiver
+            android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+                <category android:name="com.petra.chatapp" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
