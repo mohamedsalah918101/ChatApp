@@ -120,14 +120,16 @@ class ChatAppViewModel : ViewModel() {
                                 }
                             }
 
+                            Log.e("ViewModel", token.toString())
 
 
                             if (task.isSuccessful) {
                                 message.value = ""
                             }
-                        }
-                }
 
+                        }
+
+                }
         }
 
     private fun sendNotification(notification: PushNotification) = viewModelScope.launch {

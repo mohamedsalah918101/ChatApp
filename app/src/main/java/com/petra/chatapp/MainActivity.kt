@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun generateToken() {
         val firebaseInstance = FirebaseInstallations.getInstance()
-        firebaseInstance.id.addOnSuccessListener {
+        firebaseInstance.id.addOnSuccessListener { installationId ->
             FirebaseMessaging.getInstance().token.addOnSuccessListener { gettoken ->
                 token = gettoken
 
