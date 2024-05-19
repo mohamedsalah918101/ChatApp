@@ -135,6 +135,11 @@ class ChatAppViewModel : ViewModel() {
     private fun sendNotification(notification: PushNotification) = viewModelScope.launch {
         try {
             val response = RetrofitInstance.api.postNotification(notification)
+            if (response.isSuccessful) {
+                Log.d("VIEWMODEL", "Notification sent successfully")
+            } else {
+                Log.e("VIEWMODEL", "Notification failed: ${response.errorBody()?.string()}")
+            }
         } catch (e: Exception) {
             Log.e("VIEWMODELERROR", e.toString())
         }
